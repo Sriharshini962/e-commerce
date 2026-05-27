@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanMart - Our Premium Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles specific to services page */
+        .services-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+        .services-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .services-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: #fff7ed;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .service-icon i {
+            font-size: 2.5rem;
+            color: #f97316;
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+        .service-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .service-features {
+            list-style: none;
+            text-align: left;
+            margin-top: 1rem;
+        }
+        .service-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #334155;
+        }
+        .service-features li i {
+            color: #10b981;
+            font-size: 0.9rem;
+        }
+        .service-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #d97706;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        .why-choose-us {
+            background: #f8fafc;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .why-choose-us h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1a1a2e;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-item {
+            padding: 1.5rem;
+        }
+        .feature-item i {
+            font-size: 2rem;
+            color: #f97316;
+            margin-bottom: 1rem;
+        }
+        .feature-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .pricing-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: white;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+        .pricing-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+        }
+        .pricing-card.featured .btn {
+            background: white;
+            color: #f97316;
+        }
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        .pricing-card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .pricing-card ul li {
+            padding: 0.5rem 0;
+        }
+        @media (max-width: 768px) {
+            .services-hero h1 { font-size: 2rem; }
+            .service-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="logo">
+        <a href="index.html">Urban<span>Mart</span></a>
+    </div>
+    <div class="menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="products.html"><i class="fas fa-box-open"></i> Products</a></li>
+        <li class="active"><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li class="cart-icon">
+            <a href="cart.html">
+                <i class="fas fa-shopping-cart"></i> Cart
+                <span class="cart-count" id="cartCountDisplay">0</span>
+            </a>
+        </li>
+        <li id="authLinks"><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li id="userInfo" style="display:none;">
+            <div class="user-info">
+                <span class="user-name"><i class="fas fa-user-circle"></i> <span id="userNameDisplay"></span></span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="services-hero">
+    <h1>⚡ Our Premium Services</h1>
+    <p>We provide world-class services to make your shopping experience unforgettable</p>
+</section>
+
+<!-- Main Services Grid -->
+<div class="service-grid">
+    <!-- Service 1 -->
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-truck-fast"></i>
+        </div>
+        <h3>Express Delivery</h3>
+        <p>Lightning-fast delivery within 24-48 hours. Real-time tracking available.</p>
+        <ul class="service-features">
+            <li><i class="fas fa-check-circle"></i> Same-day delivery in metro cities</li>
+            <li><i class="fas fa-check-circle"></i> Real-time order tracking</li>
+            <li><i class="fas fa-check-circle"></i> Free delivery on orders $50+</li>
+        </ul>
+        <span class="service-badge">Most Popular</span>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-headset"></i>
+        </div>
+        <h3>24/7 Customer Support</h3>
+        <p>Round-the-clock assistance via chat, email, and phone. We're always here to help!</p>
+        <ul class="service-features">
+            <li><i class="fas fa-check-circle"></i> Live chat support</li>
+            <li><i class="fas fa-check-circle"></i> Email support within 2 hours</li>
+            <li><i class="fas fa-check-circle"></i> Phone support 24/7</li>
+        </ul>
+        <span class="service-badge">Always Available</span>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-rotate-left"></i>
+        </div>
+        <h3>Easy Returns</h3>
+        <p>30-day hassle-free returns. Full money-back guarantee, no questions asked.</p>
+        <ul class="service-features">
+            <li><i class="fas fa-check-circle"></i> Free return pickup</li>
+            <li><i class="fas fa-check-circle"></i> Instant refunds</li>
+            <li><i class="fas fa-check-circle"></i> No restocking fee</li>
+        </ul>
+        <span class="service-badge">Risk-Free</span>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Secure Payments</h3>
+        <p>SSL encrypted checkout. Multiple secure payment options available.</p>
+        <ul class="service-features">
+            <li><i class="fas fa-check-circle"></i> 128-bit SSL encryption</li>
+            <li><i class="fas fa-check-circle"></i> Multiple payment gateways</li>
+            <li><i class="fas fa-check-circle"></i> Buyer protection program</li>
+        </ul>
+        <span class="service-badge">100% Secure</span>
+    </div>
+
+    <!-- Service 5 -->
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-gift"></i>
+        </div>
+        <h3>Gift Wrapping</h3>
+        <p>Special gift wrapping service for birthdays, anniversaries, and special occasions.</p>
+        <ul class="service-features">
+            <li><i class="fas fa-check-circle"></i> Premium gift boxes</li>
+            <li><i class="fas fa-check-circle"></i> Personalized messages</li>
+            <li><i class="fas fa-check-circle"></i> Same-day dispatch</li>
+        </ul>
+        <span class="service-badge">Only $4.99</span>
+    </div>
+
+    <!-- Service 6 -->
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-exchange-alt"></i>
+        </div>
+        <h3>Size Exchange</h3>
+        <p>Free size exchange within 15 days of delivery. No additional charges.</p>
+        <ul class="service-features">
+            <li><i class="fas fa-check-circle"></i> Free pickup & delivery</li>
+            <li><i class="fas fa-check-circle"></i> Size guide available</li>
+            <li><i class="fas fa-check-circle"></i> Virtual try-on feature</li>
+        </ul>
+        <span class="service-badge">Easy Exchange</span>
+    </div>
+</div>
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-us">
+    <div class="container">
+        <h2>🌟 Why Choose UrbanMart?</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-medal"></i>
+                <h4>Premium Quality</h4>
+                <p>Only the best products from verified sellers</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-tag"></i>
+                <h4>Best Prices</h4>
+                <p>Price match guarantee on all products</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-star"></i>
+                <h4>4.8 Rating</h4>
+                <p>Trusted by over 100,000+ customers</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-award"></i>
+                <h4>Award Winning</h4>
+                <p>Best E-commerce platform 2024</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Plans Section -->
+<section class="pricing-section">
+    <div class="container">
+        <h2 class="section-title">💰 Membership Plans</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">Choose the perfect plan for your shopping needs</p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <div class="price">$0<span>/month</span></div>
+                <ul>
+                    <li>✓ Free shipping on $50+</li>
+                    <li>✓ Standard support</li>
+                    <li>✓ 15-day returns</li>
+                    <li>✗ Early access sales</li>
+                    <li>✗ Exclusive discounts</li>
+                </ul>
+                <button class="btn btn-outline">Current Plan</button>
+            </div>
+            
+            <div class="pricing-card featured">
+                <h3>Premium</h3>
+                <div class="price">$9.99<span>/month</span></div>
+                <ul>
+                    <li>✓ Free shipping on all orders</li>
+                    <li>✓ Priority support 24/7</li>
+                    <li>✓ 45-day returns</li>
+                    <li>✓ Early access sales</li>
+                    <li>✓ 10% off exclusive</li>
+                </ul>
+                <button class="btn">Upgrade Now</button>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Business</h3>
+                <div class="price">$29.99<span>/month</span></div>
+                <ul>
+                    <li>✓ Bulk order discounts</li>
+                    <li>✓ Dedicated account manager</li>
+                    <li>✓ Custom pricing</li>
+                    <li>✓ API access</li>
+                    <li>✓ Analytics dashboard</li>
+                </ul>
+                <button class="btn btn-outline">Contact Sales</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="why-choose-us">
+    <div class="container">
+        <h2>⭐ What Our Customers Say</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-quote-left" style="color: #f97316;"></i>
+                <p>"UrbanMart's service is outstanding! Fast delivery and great support."</p>
+                <h4>- Sarah Johnson</h4>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-quote-left" style="color: #f97316;"></i>
+                <p>"Best online shopping experience. Easy returns and secure payments."</p>
+                <h4>- Michael Chen</h4>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-quote-left" style="color: #f97316;"></i>
+                <p>"Love the premium membership! The discounts are worth every penny."</p>
+                <h4>- Priya Sharma</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>UrbanMart</h3>
+            <p>Your one-stop shop for premium products since 2024.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Service</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Returns Policy</a>
+            <a href="#">Shipping Info</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 UrbanMart. All rights reserved. | Black, White & Orange Vibe</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+    // Additional services page specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+        checkLoginStatus();
+        initMobileMenu();
+    });
+    
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('urbanmart_cart')) || [];
+        const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badge = document.getElementById('cartCountDisplay');
+        if (badge) badge.textContent = total;
+    }
+    
+    function checkLoginStatus() {
+        fetch('check_auth.php')
+            .then(res => res.json())
+            .then(data => {
+                const authLinks = document.getElementById('authLinks');
+                const userInfo = document.getElementById('userInfo');
+                const userName = document.getElementById('userNameDisplay');
+                
+                if (data.logged_in && authLinks && userInfo) {
+                    authLinks.style.display = 'none';
+                    userInfo.style.display = 'flex';
+                    if (userName) userName.textContent = data.user_name;
+                }
+            })
+            .catch(() => {});
+    }
+    
+    function logout() {
+        window.location.href = 'logout.php';
+    }
+    
+    function initMobileMenu() {
+        const toggle = document.getElementById('mobileMenuToggle');
+        const nav = document.getElementById('navLinks');
+        if (toggle && nav) {
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('show');
+            });
+        }
+    }
+</script>
+</body>
+</html>

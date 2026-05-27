@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanMart - Premium Online Shopping</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="logo">
+        <a href="index.html">Urban<span>Mart</span></a>
+    </div>
+    <div class="menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li class="active"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="products.html"><i class="fas fa-box-open"></i> Products</a></li>
+        <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li class="cart-icon">
+            <a href="cart.html">
+                <i class="fas fa-shopping-cart"></i> Cart
+                <span class="cart-count">0</span>
+            </a>
+        </li>
+        <li id="authLinks"><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li id="userInfo" style="display:none;">
+            <div class="user-info">
+                <span class="user-name"><i class="fas fa-user-circle"></i> <span id="userName"></span></span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Fresh Styles. <span>Bold Deals.</span></h1>
+    <p>Discover quality products, unbeatable prices, and effortless shopping experience.</p>
+    <a href="products.html" class="btn btn-primary btn-large">
+        <i class="fas fa-arrow-right"></i> Shop Now
+    </a>
+</section>
+
+<!-- Featured Products -->
+<div class="container">
+    <h2 class="section-title">🔥 Featured Products</h2>
+    <div class="product-grid" id="featuredProducts"></div>
+</div>
+
+<!-- Benefits Section -->
+<section class="benefits">
+    <div class="container">
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <i class="fas fa-truck-fast"></i>
+                <h3>Free Shipping</h3>
+                <p>On orders over $50</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-rotate-left"></i>
+                <h3>Easy Returns</h3>
+                <p>30-day return policy</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-lock"></i>
+                <h3>Secure Payment</h3>
+                <p>100% secure checkout</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Dedicated customer care</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>UrbanMart</h3>
+            <p>Your one-stop shop for premium products since 2024.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Service</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Returns Policy</a>
+            <a href="#">Shipping Info</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 UrbanMart. All rights reserved. | Black, White & Orange Vibe</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

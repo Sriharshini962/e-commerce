@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanMart - Shopping Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .cart-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .cart-header h1 {
+            font-size: 2rem;
+            color: #1a1a2e;
+        }
+        .cart-header p {
+            color: #64748b;
+        }
+        .cart-table {
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-collapse: collapse;
+        }
+        .cart-table th {
+            background: #f8fafc;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .cart-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #f97316;
+        }
+        .cart-quantity {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .remove-btn {
+            background: #fee2e2;
+            color: #ef4444;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .remove-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+        .cart-summary {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            text-align: right;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .cart-summary h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .cart-summary .total {
+            color: #f97316;
+            font-size: 1.8rem;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 20px;
+        }
+        .empty-cart i {
+            font-size: 4rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+        .empty-cart h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .continue-shopping {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .cart-table, .cart-table tbody, .cart-table tr, .cart-table td {
+                display: block;
+                width: 100%;
+            }
+            .cart-table tr {
+                margin-bottom: 1rem;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="logo">
+        <a href="index.html">Urban<span>Mart</span></a>
+    </div>
+    <div class="menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="products.html"><i class="fas fa-box-open"></i> Products</a></li>
+        <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li class="active cart-icon">
+            <a href="cart.html">
+                <i class="fas fa-shopping-cart"></i> Cart
+                <span class="cart-count" id="cartCountDisplay">0</span>
+            </a>
+        </li>
+        <li id="authLinks"><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li id="userInfo" style="display:none;">
+            <div class="user-info">
+                <span class="user-name"><i class="fas fa-user-circle"></i> <span id="userNameDisplay"></span></span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<!-- Cart Content -->
+<div class="cart-container">
+    <div class="cart-header">
+        <h1><i class="fas fa-shopping-cart"></i> Your Shopping Cart</h1>
+        <p>Review and modify your items before checkout</p>
+    </div>
+    
+    <div id="cartItems"></div>
+    
+    <div class="continue-shopping">
+        <a href="products.html" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+        </a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>UrbanMart</h3>
+            <p>Your one-stop shop for premium products since 2024.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Service</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Returns Policy</a>
+            <a href="#">Shipping Info</a>
+        </div>
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 UrbanMart. All rights reserved. | Black, White & Orange Vibe</p>
+    </div>
+</footer>
+
+<script>
+    // Products Database
+    const products = [
+        { id: 1, name: "Premium Cotton T-Shirt", price: 39.99, icon: "fa-tshirt" },
+        { id: 2, name: "Classic Denim Jacket", price: 89.99, icon: "fa-shopping-bag" },
+        { id: 3, name: "Urban Sneakers", price: 69.99, icon: "fa-shoe-prints" },
+        { id: 4, name: "Wireless Headphones", price: 99.99, icon: "fa-headphones" },
+        { id: 5, name: "Smart Watch", price: 149.99, icon: "fa-clock" },
+        { id: 6, name: "Leather Backpack", price: 79.99, icon: "fa-bag-shopping" }
+    ];
+    
+    let cart = JSON.parse(localStorage.getItem('urbanmart_cart')) || [];
+    
+    function saveCart() {
+        localStorage.setItem('urbanmart_cart', JSON.stringify(cart));
+        updateCartCount();
+    }
+    
+    function updateCartCount() {
+        const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badges = document.querySelectorAll('.cart-count');
+        badges.forEach(badge => {
+            if (badge) badge.textContent = total;
+        });
+    }
+    
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        saveCart();
+        renderCart();
+        showNotification('Item removed from cart', 'info');
+    }
+    
+    function updateQuantity(productId, quantity) {
+        const item = cart.find(item => item.id === productId);
+        if (item) {
+            item.quantity = Math.max(1, parseInt(quantity));
+            saveCart();
+            renderCart();
+        }
+    }
+    
+    function checkout() {
+        if (cart.length === 0) {
+            showNotification('Your cart is empty!', 'error');
+            return;
+        }
+        const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+        alert(`Thank you for your order!\n\nTotal: $${total.toFixed(2)}\n\nYour order has been placed successfully!`);
+        cart = [];
+        saveCart();
+        renderCart();
+    }
+    
+    function renderCart() {
+        const container = document.getElementById('cartItems');
+        if (!container) return;
+        
+        if (cart.length === 0) {
+            container.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Your cart is empty</h3>
+                    <p>Looks like you haven't added any items yet.</p>
+                    <a href="products.html" class="btn btn-primary" style="margin-top: 1rem;">Start Shopping</a>
+                </div>
+            `;
+            return;
+        }
+        
+        let total = 0;
+        let html = `
+            <table class="cart-table">
+                <thead>
+                    <tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th></th></tr>
+                </thead>
+                <tbody>
+        `;
+        
+        cart.forEach(item => {
+            const product = products.find(p => p.id === item.id);
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            html += `
+                <tr>
+                    <td>
+                        <div class="product-info">
+                            <div class="product-icon"><i class="fas ${product.icon}"></i></div>
+                            <div><strong>${item.name}</strong></div>
+                        </div>
+                    </td>
+                    <td>$${item.price.toFixed(2)}</td>
+                    <td>
+                        <input type="number" class="cart-quantity" value="${item.quantity}" min="1" 
+                               onchange="updateQuantity(${item.id}, this.value)">
+                    </td>
+                    <td>$${itemTotal.toFixed(2)}</td>
+                    <td>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        html += `
+                </tbody>
+            </table>
+            <div class="cart-summary">
+                <h3>Subtotal: <span class="total">$${total.toFixed(2)}</span></h3>
+                <p>Shipping & taxes calculated at checkout</p>
+                <button class="btn btn-primary" onclick="checkout()" style="margin-top: 1rem;">
+                    <i class="fas fa-credit-card"></i> Proceed to Checkout
+                </button>
+            </div>
+        `;
+        
+        container.innerHTML = html;
+    }
+    
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed; bottom: 20px; right: 20px;
+            background: ${type === 'error' ? '#ef4444' : '#10b981'};
+            color: white; padding: 12px 20px; border-radius: 12px;
+            z-index: 9999; animation: fadeIn 0.3s ease;
+        `;
+        notification.innerHTML = message;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+    }
+    
+    function checkLoginStatus() {
+        fetch('check_auth.php')
+            .then(res => res.json())
+            .then(data => {
+                const authLinks = document.getElementById('authLinks');
+                const userInfo = document.getElementById('userInfo');
+                const userName = document.getElementById('userNameDisplay');
+                if (data.logged_in && authLinks && userInfo) {
+                    authLinks.style.display = 'none';
+                    userInfo.style.display = 'flex';
+                    if (userName) userName.textContent = data.user_name;
+                }
+            })
+            .catch(() => {});
+    }
+    
+    function logout() { window.location.href = 'logout.php'; }
+    
+    function initMobileMenu() {
+        const toggle = document.getElementById('mobileMenuToggle');
+        const nav = document.getElementById('navLinks');
+        if (toggle && nav) {
+            toggle.addEventListener('click', () => nav.classList.toggle('show'));
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCart();
+        updateCartCount();
+        checkLoginStatus();
+        initMobileMenu();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanMart - Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-page-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .contact-form-container {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .contact-info-container {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 24px;
+            padding: 2rem;
+            color: white;
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .form-header i {
+            font-size: 3rem;
+            color: #f97316;
+            margin-bottom: 1rem;
+        }
+        .form-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
+        }
+        .contact-info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+        .contact-info-item i {
+            font-size: 1.5rem;
+            color: #f97316;
+        }
+        .contact-info-item h4 {
+            margin-bottom: 0.3rem;
+        }
+        .contact-info-item p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .success-msg, .error-msg {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .success-msg { background: #dcfce7; color: #166534; }
+        .error-msg { background: #fee2e2; color: #991b1b; }
+        .social-contact {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+        .social-contact a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-contact a:hover {
+            background: #f97316;
+            transform: translateY(-3px);
+        }
+        @media (max-width: 768px) {
+            .contact-page-wrapper {
+                grid-template-columns: 1fr;
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="logo">
+        <a href="index.html">Urban<span>Mart</span></a>
+    </div>
+    <div class="menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="products.html"><i class="fas fa-box-open"></i> Products</a></li>
+        <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
+        <li class="active"><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li class="cart-icon">
+            <a href="cart.html">
+                <i class="fas fa-shopping-cart"></i> Cart
+                <span class="cart-count" id="cartCountDisplay">0</span>
+            </a>
+        </li>
+        <li id="authLinks"><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li id="userInfo" style="display:none;">
+            <div class="user-info">
+                <span class="user-name"><i class="fas fa-user-circle"></i> <span id="userNameDisplay"></span></span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<!-- Contact Page Content -->
+<div class="contact-page-wrapper">
+    <!-- Contact Form -->
+    <div class="contact-form-container">
+        <div class="form-header">
+            <i class="fas fa-paper-plane"></i>
+            <h2>Get In Touch</h2>
+            <p>We'd love to hear from you! Send us a message and we'll respond within 24 hours.</p>
+        </div>
+        
+        <form id="contactForm">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Full Name *</label>
+                <input type="text" id="contactName" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email Address *</label>
+                <input type="email" id="contactEmail" placeholder="Enter your email address" required>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-phone"></i> Phone Number</label>
+                <input type="tel" id="contactPhone" placeholder="Enter your phone number">
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-tag"></i> Subject *</label>
+                <select id="contactSubject">
+                    <option value="general">General Inquiry</option>
+                    <option value="order">Order Related</option>
+                    <option value="return">Return/Exchange</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="support">Technical Support</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-comment"></i> Your Message *</label>
+                <textarea id="contactMsg" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+            
+            <div id="formMessage" style="display:none;"></div>
+        </form>
+    </div>
+    
+    <!-- Contact Information -->
+    <div class="contact-info-container">
+        <h2 style="margin-bottom: 2rem;"><i class="fas fa-address-card"></i> Contact Information</h2>
+        
+        <div class="contact-info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+                <h4>Our Address</h4>
+                <p>123 Business Street, Tech Park<br>Bangalore - 560001, India</p>
+            </div>
+        </div>
+        
+        <div class="contact-info-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+                <h4>Phone Numbers</h4>
+                <p>Customer Support: +91 98765 43210<br>Sales: +91 98765 43211</p>
+            </div>
+        </div>
+        
+        <div class="contact-info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+                <h4>Email Addresses</h4>
+                <p>General: support@urbanmart.com<br>Sales: sales@urbanmart.com</p>
+            </div>
+        </div>
+        
+        <div class="contact-info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+                <h4>Business Hours</h4>
+                <p>Monday - Friday: 9:00 AM - 8:00 PM<br>Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+        
+        <div class="social-contact">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5!2d77.5945!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                width="100%" height="200" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>UrbanMart</h3>
+            <p>Your one-stop shop for premium products since 2024.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Service</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Returns Policy</a>
+            <a href="#">Shipping Info</a>
+        </div>
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 UrbanMart. All rights reserved. | Black, White & Orange Vibe</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+        checkLoginStatus();
+        initMobileMenu();
+        setupContactForm();
+    });
+    
+    function setupContactForm() {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('name', document.getElementById('contactName').value);
+            formData.append('email', document.getElementById('contactEmail').value);
+            formData.append('phone', document.getElementById('contactPhone').value);
+            formData.append('subject', document.getElementById('contactSubject').value);
+            formData.append('message', document.getElementById('contactMsg').value);
+            
+            const response = await fetch('save_contact.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            const msgDiv = document.getElementById('formMessage');
+            msgDiv.style.display = 'block';
+            msgDiv.className = result.success ? 'success-msg' : 'error-msg';
+            msgDiv.innerHTML = result.message;
+            
+            if (result.success) {
+                form.reset();
+                setTimeout(() => {
+                    msgDiv.style.display = 'none';
+                }, 3000);
+            }
+        });
+    }
+    
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('urbanmart_cart')) || [];
+        const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badge = document.getElementById('cartCountDisplay');
+        if (badge) badge.textContent = total;
+    }
+    
+    function checkLoginStatus() {
+        fetch('check_auth.php')
+            .then(res => res.json())
+            .then(data => {
+                const authLinks = document.getElementById('authLinks');
+                const userInfo = document.getElementById('userInfo');
+                const userName = document.getElementById('userNameDisplay');
+                if (data.logged_in && authLinks && userInfo) {
+                    authLinks.style.display = 'none';
+                    userInfo.style.display = 'flex';
+                    if (userName) userName.textContent = data.user_name;
+                }
+            })
+            .catch(() => {});
+    }
+    
+    function logout() { window.location.href = 'logout.php'; }
+    function initMobileMenu() {
+        const toggle = document.getElementById('mobileMenuToggle');
+        const nav = document.getElementById('navLinks');
+        if (toggle && nav) {
+            toggle.addEventListener('click', () => nav.classList.toggle('show'));
+        }
+    }
+</script>
+</body>
+</html>
